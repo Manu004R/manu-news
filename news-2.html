@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manu News Flash - Get the latest news and updates.">
+    <title>Manu News KE</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            margin: 0;
+            padding: 0;
+            border-radius: ;
+        }
+        .header {
+            background-color: rgb(209, 19, 19);
+            color: #ffffff;
+            padding: 5px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 34px;
+            overflow: hidden;
+            font-size: 10px;
+            border-radius: px;
+            text-decoration: bold;
+        
+    }
+    
+
+    
+    
+
+
+        .header img {
+            max-width: 60px;
+            height: auto;
+            position: relative;
+            z-index: 1;
+             border-radius: 15px;
+           
+        }
+        .header-content {
+            flex: 1;
+            text-align: center;
+            text-decoration: bold;
+            z-index: 1;
+        }
+        @keyframes blink {
+            0%, 100% {
+                background-color: rgb(209, 19, 19);
+            }
+            50% {
+                background-color: rgb(226, 31, 31);
+            }
+
+
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            background-size: 80% 80%;
+            animation: moveDots 3s linear infinite;
+            z-index: 0;
+        }
+        @keyframes moveDots {
+            0% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+        .live-update-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            height: 62px;
+            z-index: 1;
+        }
+        .live-update-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 8px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            overflow: hidden;
+            animation: blink 3s linear infinite; 
+            width: 20px; 
+            text-align: center;
+        }
+        .live-update-button h4 {
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .nav {
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 10px 0;
+            position: relative;
+            border-radius: 30px;
+        }
+        .nav .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 40px;
+            padding: 3px;
+            max-width: 220px;
+            width: 175%;
+            margin-right: 10px;
+        }
+        .nav .search-bar input {
+            border: none;
+            padding: 1px;
+            width: 93%;
+            border-radius: px;
+            outline: none;
+        }
+        .nav .search-bar button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 28px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .nav .search-bar button:hover {
+            background-color: #cc0000;
+        }
+        .nav .buttons {
+            display: flex;
+            gap: 20px;
+            border-radius: px;
+        }
+        .nav .buttons button {
+            background: none;
+            border: none;
+            padding: 7px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            border-radius: 35px;
+        }
+        .nav .buttons button:hover {
+            color: #ff0000;
+        }
+        .headline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 20px 0;
+            border-radius: ;
+        }
+        .headline div {
+            background: white;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            flex: 1 1 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            border-radius: px;
+        }
+        .headline img {
+            width: 50%;
+            height: auto;
+            border-radius: 13px;
+
+       
+
+        }
+        .headline h5 {
+            margin: 10px 0;
+            h
+        }
+        .headline p {
+            color: gray;
+        }
+        .content {
+            display: none;
+            margin-top: 10px;
+            color: black;
+        }
+        .hidden {
+            display: none;
+        }
+        .source {
+            font-weight: bold;
+            color: black;
+        }
+       
+        
+        .promotion.show {
+            transform: translateY(0);
+        }
+        .promotion .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center ;
+            padding: 9px;
+            position: relative;
+            width: 100%;
+            bottom: ;
+            font-size: 17px;
+            height: 25px;
+            text-decoration: bold;
+
+            
+        }
+        footer a {
+            color: rgb(255, 255, 255);
+            text-decoration: bold;
+           
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+       
+        .marquee {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            overflow: hidden;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .marquee-content {
+            display: flex;
+            align-items: right;
+            height: 100%;
+            animation: marquee 23s linear infinite;
+        }
+        
+        .marquee-ball {
+            width: 200px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: blink step-start infinite; /* Adjusted for slower blink */
+        }
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+            .nav .search-bar {
+                margin-bottom: 10px;
+            }
+            .headline {
+                flex-direction: column;
+                
+            }
+            .headline div {
+                flex: 1 1 100%;
+                max-width: 100%;
+                
+            }
+        }
+
+        .click-count {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgb(85, 95, 95);
+            border-radius: 30px;
+        }
+        .click-count span {
+            margin-left: 5px;
+        }
+
+
+.manu-news-button{
+
+
+            display: inline-block;
+            padding: 3px 55px;
+            font-size: 5px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            animation: blink 3s linear infinite; /* Faster blinking effect */
+            text-align: center;
+            margin-top: 5px;
+        }
+
+
+        .breaking-news-button {
+            display: inline-block;
+            padding: 3px 55px;
+            font-size: 5px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            animation: blink 3s linear infinite;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+         .blue-button {
+             display: inline-block;
+            padding: 3px 55px;
+            font-size: 9px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            animation: blink 9s linear infinite; 
+            text-align: center;
+            margin-top: 5px;
+            width: 90%;
+            height: 38px;
+            
+        }
+
+
+        .editor-button {
+             display: inline-block;
+            padding: 3px 55px;
+            font-size: 10px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: px;
+            cursor: pointer;
+            animation: blink 9s linear infinite; 
+            text-align: center;
+            margin-top: 5px;
+            width: 100%;
+            height: 29px;
+        }
+
+        .developing-button {
+             display: inline-block;
+            padding: 3px 55px;
+            font-size: 10px;
+            color: white;
+            background-color: maroon;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            animation: blink 9s linear infinite; 
+            text-align: center;
+            margin-top: 5px;
+            width: 100%;
+            height: 29px;
+        }
+
+         .green-button {
+             display: inline-block;
+            padding: 3px 55px;
+            font-size: 8px;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            animation: blink 8s linear infinite; 
+            text-align: center;
+            margin-top: 5px;
+            width: 100%;
+            
+         }
+
+.sponsored-news {
+            background-color: rgb(27, 6, 6);
+            display: block;
+            flex-wrap: block;
+            gap: 10;
+            margin: 22px 0;
+            height: 300px;
+            width: 500px;
+            padding: 5px;
+            font-size: ;
+        
+}
+        .sponsored-news h4 {
+            margin-top: 0;
+            
+        }
+        .advertisements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 7px 0;
+            background-color: whitesmoke;
+
+            
+        }
+
+    
+        .advertisements h2 {
+            margin-top: 0;
+        }
+        .ad-banner {
+            width: 50%;
+            height: 40px;
+            background-color: rgb(123, 124, 124);
+            border-radius: 75px;
+            margin: 10px 0;
+            text-align: center;
+            line-height: 50px;
+            color: #333;
+            font-size: 20px;
+        }
+
+
+    </style>
+
+    <script>
+        function filterNews(category) {
+            var headlines = document.querySelectorAll('.headline div');
+            headlines.forEach(function(headline) {
+                if (category === 'all' || headline.classList.contains(category)) {
+                    headline.classList.remove('hidden');
+                } else {
+                    headline.classList.add('hidden');
+                }
+            });
+        }
+
+        function toggleContent(event) {
+            var content = event.currentTarget.querySelector('.content');
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+
+        function searchNews() {
+            var query = document.getElementById('search-input').value.toLowerCase();
+            var headlines = document.querySelectorAll('.headline div');
+            headlines.forEach(function(headline) {
+                var title = headline.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    headline.classList.remove('hidden');
+                } else {
+                    headline.classList.add('hidden');
+                }
+            });
+        }
+
+        function showPromotion() {
+            document.querySelector('.promotion').classList.add('show');
+        }
+
+        function closePromotion() {
+            document.querySelector('.promotion').classList.remove('show');
+        }
+
+        function openArticle(url, event) {
+            var clickCountElem = event.currentTarget.querySelector('.click-count span');
+            var currentCount = parseInt(clickCountElem.textContent) || 0;
+            clickCountElem.textContent = currentCount + 1;
+            window.open(url, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            setTimeout(showPromotion, 1000);
+
+            
+            setInterval(function() {
+                var promo = document.querySelector('.promotion');
+                promo.classList.toggle('show');
+            }, 3000); 
+        });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img src="images/kenyan flag.jpg" alt="Header Image"> 
+        <div class="header-content">
+            <h1>MWALIMU-NEWS-HUB</h1>
+        </div>
+        <div class="marquee">
+            <div class="marquee-content">
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+                <div class="marquee-ball"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="live-update-buttons-container">
+        <div class="live-update-button"><h4>LIVE UPDATE</h4></div>
+        <div class="live-update-button"><h4>LIVE UPDATE</h4></div>
+    </div>
+
+    <div class="container">
+        <div class="nav">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search news..." oninput="searchNews()">
+                <button onclick="searchNews()">Search</button>
+            </div>
+            <div class="buttons">
+                <button onclick="filterNews('News')">News</button>
+                <button onclick="filterNews('Counties')">Counties</button>
+                <button onclick="filterNews('politics')">Politics</button>
+                <button onclick="filterNews('latest')">Latest</button>
+            </div>
+        </div>
+        <div class="headline">
+            <div class="News" onclick="openArticle('https://www.mwalimunews.ke/olympics-incident', event)">
+                <img src="images/images-9.jpeg" alt="Teachers Union Warn of Industrial Action">
+                <h3>TOP STORY: Teachers Union Warn of Possibility of Industrial Action Ahead of 3rd Term</h3>
+                <p class="source">Jd Manuel</p>
+                <button class="breaking-news-button"><h1>BREAKING NEWS</h1></button>
+                <div class="content">
+                    <p>Earlier today, KNUT SG Collince Oyuu issued a strike notice, warning they will not resume classes if the CBA agreement is not fulfilled.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+ <div class="News" onclick="openArticle('https://www.mwalimunews.ke/olympics-incident', event)">
+                <img src="images/images-9.jpeg" alt="Teachers Union Warn of Industrial Action">
+                <h3>TOP STORY: Teachers Union Warn of Possibility of Industrial Action Ahead of 3rd Term</h3>
+                <p class="source">Jd Manuel</p>
+               
+                <div class="content">
+                    <p>Earlier today, KNUT SG Collince Oyuu issued a strike notice, warning they will not resume classes if the CBA agreement is not fulfilled.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+ <div class="News" onclick="openArticle('https://www.mwalimunews.ke/olympics-incident', event)">
+                <img src="images/images-9.jpeg" alt="Teachers Union Warn of Industrial Action">
+                <h3>TOP STORY: Teachers Union Warn of Possibility of Industrial Action Ahead of 3rd Term</h3>
+                <p class="source">Jd Manuel</p>
+               <button class="breaking-news-button"><h1>BREAKING NEWS</h1></button>
+                <div class="content">
+                    <p>Earlier today, KNUT SG Collince Oyuu issued a strike notice, warning they will not resume classes if the CBA agreement is not fulfilled.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+            <div class="News" onclick="openArticle('https://www.mwalimunews.ke/tribute-george-magoah', event)">
+                <img src="images/images-8.jpeg" alt="Tribute to Late Education CS Professor George Magoah">
+                <h3>‘Tribute to Late Education CS George Magoah’</h3>
+                <p class="source">Jd Manuel</p>
+               
+                <div class="content">
+                    <p>Late Professor Magoah was the longest-serving Education CS under the Jubilee government.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+ <div class="Counties" onclick="openArticle('https://www.mwalimunews.ke/school-reopening-security', event)">
+                <img src="images/images-6.jpeg" alt="MOE Assures Parents of Enhanced Security">
+                <h3>MOE Assures Parents of Enhanced Security in the North-Rift Ahead of School Reopening</h3>
+                <p class="source">Jd Manuel</p>
+                
+                <div class="content">
+                    <p>Addressing the media today, PS Belio Kipsang assured that the security of school-going children in the region is well catered for.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+ <div class="Counties" onclick="openArticle('https://www.mwalimunews.ke/school-reopening-security', event)">
+                <img src="images/images-6.jpeg" alt="MOE Assures Parents of Enhanced Security">
+                <h3>MOE Assures Parents of Enhanced Security in the North-Rift Ahead of School Reopening</h3>
+                <p class="source">Jd Manuel</p>
+                
+                <div class="content">
+                    <p>Addressing the media today, PS Belio Kipsang assured that the security of school-going children in the region is well catered for.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="Counties" onclick="openArticle('https://www.mwalimunews.ke/school-reopening-security', event)">
+                <img src="images/images-6.jpeg" alt="MOE Assures Parents of Enhanced Security">
+                <h3>MOE Assures Parents of Enhanced Security in the North-Rift Ahead of School Reopening</h3>
+                <p class="source">Jd Manuel</p>
+                
+                <div class="content">
+                    <p>Addressing the media today, PS Belio Kipsang assured that the security of school-going children in the region is well catered for.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+            <div class="Counties" onclick="openArticle('https://www.mwalimunews.ke/students-road-accident', event)">
+                <img src="images/cars-in-traffic.jpg" alt="Students Involved in Road Accident">
+                <h3>Students Involved in Road Accident After Leaving Music Festival</h3>
+                <p class="source">Jd Manuel</p>
+                <button class="breaking-news-button"><h1>BREAKING NEWS</h1></button>
+                <div class="content">
+                    <p>Several students were involved in a road accident while returning from a music festival, with details emerging on the causes and consequences of the incident.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+            <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+               
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+ <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+                
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+ <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+               
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+
+ <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+                <button class="breaking-news-button"><h1>MUST READ</h1></button>
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+               
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+        </div>
+    </div>
+
+   
+<div class="container">
+      
+
+       
+        <div class="sponsored-news">
+       <button class="developing-button"><h3>Developing-Story</h3></button>
+            <div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <h3><img src="images/images-7.jpeg" width="300" height="130"alt="Bus Crash Nairobi-Mombasa">
+                <h4 style="color: white;">KNEC Issues Stern Warning Ahead of KCSE</h4>
+                
+                <button class="breaking-news-button"><h1>JUST IN</h1></button>
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+            
+          
+        
+        <div class="advertisements">
+              <button class="editor-button"><h3>Editor's Pick</h3></button>
+<div class="News" onclick="openArticle('https://www.mwalimunews.ke/tribute-george-magoah', event)">
+                <img src="images/images-8.jpeg" width="220" height="160"alt="Tribute to Late Education CS Professor George Magoah">
+                <h3>‘Tribute to Late Education CS George Magoah’</h3>
+                <p class="source">Jd Manuel</p>
+
+                <div class="content">
+                    <p>Late Professor Magoah was the longest-serving Education CS under the Jubilee government.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+
+
+<div class="Counties" onclick="openArticle('https://www.mwalimunews.ke/school-reopening-security', event)">
+                <img src="images/images-6.jpeg" width="220" height="160" alt="MOE Assures Parents of Enhanced Security">
+                <h3>MOE Assures Parents of Enhanced Security in the North-Rift Ahead of School Reopening</h3>
+                <p class="source">Jd Manuel</p>
+              
+                <div class="content">
+                    <p>Addressing the media today, PS Belio Kipsang assured that the security of school-going children in the region is well catered for.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+
+ 
+
+<div class="Latest" onclick="openArticle('https://www.mwalimunews.ke/bus-crash-nairobi-mombasa', event)">
+                <img src="images/images-7.jpeg" width="220" height="160"alt="Bus Crash Nairobi-Mombasa">
+                <h3>KNEC Issues Stern Warning Ahead of KCSE Exams</h3>
+                <p class="source">Jd Manuel</p>
+                <button class="breaking-news-button"><h1>Trending</h1></button>
+                <div class="content">
+                    <p>KNEC warned that those involved in exam malpractices will face the full force of the law.</p>
+                </div>
+                <div class="click-count">👁️<span>0</span></div>
+            </div>
+            
+           
+<footer>
+
+            <h5 style=" color: white;">Manu-News-Flash 2024.  All rights reserved</h5>
+            
+        <h5 style=" color: green;"></h5>
+</footer>
+       
+
+       
+   
+</body>
+</html>
